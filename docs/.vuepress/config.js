@@ -1,4 +1,6 @@
 module.exports = {
+    base: '/invoke-docs/',
+
     lang: 'en-US',
     title: 'Invoke',
     description: 'Write functions, not controllers.',
