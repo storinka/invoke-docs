@@ -11,7 +11,7 @@ actions:
   type: secondary
 ---
 
-#### Example 1:
+#### Перший приклад:
 
 Створи функцію:
 ```php
@@ -42,7 +42,7 @@ curl "localhost:5000/invoke/1/dec2hex?dec=10"
 ```
 
 
-#### Example 2:
+#### Другий приклад:
 
 Створи тип UserResult:
 ```php
