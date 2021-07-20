@@ -15,8 +15,6 @@ actions:
 
 Створи функцію:
 ```php
-// functions/dec2hex.php
-
 function dec2hex(int $dec): string
 {
     return dechex($dec);
@@ -25,8 +23,6 @@ function dec2hex(int $dec): string
 
 Налаштуй Виклик:
 ```php
-// index.php
-
 use Invoke\InvokeMachine;
 
 InvokeMachine::setup([
