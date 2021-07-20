@@ -4,16 +4,16 @@ title: Домівка
 
 actions:
 - text: Початок роботи
-  link: /guide/getting-started.html
+  link: /uk/guide/getting-started.html
   type: primary
 - text: Вступ
-  link: /guide/
+  link: /uk/guide/
   type: secondary
 ---
 
 #### Example 1:
 
-Create a function:
+Створи функцію:
 ```php
 // functions/dec2hex.php
 
@@ -23,7 +23,7 @@ function dec2hex(int $dec): string
 }
 ```
 
-Setup Invoke:
+Налаштуй Виклик:
 ```php
 // index.php
 
@@ -38,15 +38,17 @@ InvokeMachine::setup([
 InvokeMachine::handleRequest();
 ```
 
-Invoke the function:
+Запусти сервер та виклич фукнцію:
 ```shell
-curl "http://app.test/invoke/1/dec2hex?dec=10"
+php -S localhost:5000 index.php
+
+curl "localhost:5000/invoke/1/dec2hex?dec=10"
 ```
 
 
 #### Example 2:
 
-Create a UserResult type:
+Створи тип UserResult:
 ```php
 use Invoke\Typesystem\Result;
 
@@ -60,7 +62,7 @@ class UserResult extends Result
 }
 ```
 
-Create a class function:
+Створи клас-функцію:
 ```php
 use Invoke\InvokeFunction;
 use Invoke\Typesystem\Types;
@@ -82,7 +84,8 @@ class GetUserFunction extends InvokeFunction
     }
 }
 ```
-Setup Invoke:
+
+Налаштуй Виклик:
 ```php
 // index.php
 
@@ -97,7 +100,9 @@ InvokeMachine::setup([
 InvokeMachine::handleRequest();
 ```
 
-Invoke the function:
+Запусти сервер та виклич фукнцію:
 ```shell
-curl "http://app.test/invoke/1/getUser?id=123"
+php -S localhost:5000 index.php
+
+curl "localhost:5000/invoke/1/getUser?id=123"
 ```
