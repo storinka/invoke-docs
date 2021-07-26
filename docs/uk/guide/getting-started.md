@@ -9,7 +9,7 @@
 
 ### Новий проєкт
 
-Якщо ти бажаєш створити Виклик-проєкт з нуля, ось кроки які потрібно пройти.
+Якщо ти бажаєш створити Виклик-проєкт з початку, ось кроки які потрібно пройти.
 
 #### Створи папку для проєкту
 
@@ -64,12 +64,12 @@ InvokeMachine::handleRequest();
 Після чого запусти сервер командою `php -S 5000 public/index.php` та пробуй робити запити:
 
 ```shell
-curl localhost:5000/invoke/hello?name=human
+curl localhost:5000/invoke/1/hello?name=human
 
-curl localhost:5000/invoke/bye?name=human
+curl localhost:5000/invoke/1/bye?name=human
 ```
 
-### Приклад прожкту
+### Приклад проєкту
 
 Щоб не робити забагато роботи, ми підготували шаблон Виклик-проєкту. Виконай наступну команду для створення шаблону.
 
@@ -83,7 +83,7 @@ composer create-project --prefer-dist storinka/invoke-example invoke-project
 
 Виклик має готовий плагін для інтеграції з Laravel-ем.
 
-#### Створи файл конфігурації функцій
+#### Створи файл-конфігурацію функцій
 
 ```php
 // config/functions.php
@@ -128,7 +128,9 @@ return [
 ```
 
 ```php
-// routes/web.php
+// плагін вміє автоматично створювати документацію на основі зареєстрованих функцій
+// документація доступна за цим шляхом: /invoke/docs
+// і реєструється наступною стрічкою у файлі routes/web.php
 
 \Invoke\Laravel\Facades\Invoke::docsRoutes();
 ```
@@ -138,4 +140,4 @@ return [
 - `app/Invoke/Functions`
 - `app/Invoke/Types`
 
-#### That it, you can do your job now :)
+#### Ось і все :)
