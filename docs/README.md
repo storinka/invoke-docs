@@ -1,6 +1,8 @@
 ---
 home: true
 title: Home
+heroImage: /images/logo.png
+heroText: 
 
 actions:
 - text: Get Started
