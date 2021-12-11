@@ -16,90 +16,119 @@ actions:
 #### Example 1:
 
 Create a function:
-```php
-// functions/dec2hex.php
 
-function dec2hex(int $dec): string
+```php
+function sayHelloTo(string $name): string
 {
-    return dechex($dec);
+    return "Hello, $name!";
 }
 ```
 
 Setup Invoke:
+
 ```php
-// index.php
-
-use Invoke\InvokeMachine;
-
-InvokeMachine::setup([
-    1 => [
-        "dec2hex" => "dec2hex"
-    ]
+Invoke::setup([
+    "sayHelloTo",
 ]);
 
-InvokeMachine::handleRequest();
+Invoke::handleHTTPRequests();
 ```
 
-Invoke the function:
+Start a server, invoke the function:
+
 ```shell
-curl "http://app.test/invoke/1/dec2hex?dec=10"
-```
+curl "localhost/sayHelloTo?name=Kitty"
 
+# response will be: { "result": "Hello, Kitty!" }
+```
 
 #### Example 2:
 
-Create a UserResult type:
-```php
-use Invoke\Typesystem\Result;
+Create Post and Comment types:
 
-class UserResult extends Result
+```php
+class PostResult extends Result
 {
     public int $id;
     
-    public string $name;
+    public string $title;
     
-    public bool $is_verified;
+    #[ArrayOf(PostType::class)]
+    public array $comments;
 }
 ```
 
-Create a class function:
 ```php
-use Invoke\InvokeFunction;
-use Invoke\Typesystem\Types;
-
-class GetUserFunction extends InvokeFunction
+class CommentResult extends Result
 {
-    public static function params(): array
-    {
-        return [
-            "id" => Types::Int,
-        ];
-    }
+    public int $id;
     
-    public function handle(int $id): UserResult
+    public string $message;
+}
+
+class CommentInput extends Input
+{
+    #[Lenght(3, 255)]
+    public string $message;
+}
+```
+
+Create methods for getting posts and creating comments:
+
+```php
+class GetPosts extends Method
+{
+    protected PostsRepository $postsRepository;
+
+    public function __construct(PostsRepository $postsRepository)
     {
-        $user = getUserFromDb($id);
-        
-        return UserResult::from($user);
+        $this->postsRepository = $postsRepository;
+    }
+
+    protected function handle(): array
+    {
+        $posts = $this->postsRepository->getWithComments();
+    
+        return PostType::many($posts);
+    }
+}
+
+class CreateComment extends Method
+{
+    protected CommentsRepository $commentsRepository;
+
+    public function __construct(CommentsRepository $commentsRepository)
+    {
+        $this->commentsRepository = $commentsRepository;
+    }
+
+    protected function handle(int $postId, CommentInput $comment): CommentResult
+    {
+        $newComment = $this->commentsRepository->create($postId, $comment);
+    
+        return CommentResult::from($newComment);
     }
 }
 ```
+
 Setup Invoke:
+
 ```php
-// index.php
-
-use Invoke\InvokeMachine;
-
-InvokeMachine::setup([
-    1 => [
-        "getUser" => GetUserFunction::class,
-    ]
+Invoke::setup([
+    "getPosts" => GetPosts::class,
+    "createComment" => CreateComment::class,
 ]);
 
-InvokeMachine::handleRequest();
+Invoke::handleHTTPRequests();
 ```
 
-Invoke the function:
+Start a server, invoke the functions:
+
 ```shell
-curl "http://app.test/invoke/1/getUser?id=123"
+curl "localhost/getPosts"
+```
+
+```shell
+curl -X POST "localhost/createComment" \
+  --data '{ "postId": 123, comment: { "message: "Great post!" } }'
 ```

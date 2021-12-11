@@ -4,7 +4,7 @@
 
 ### No-namespace way
 
-- good option when there are few functions
+- good option if you have few functions
 - looks familiar and natural
 
 #### Examples
@@ -15,14 +15,14 @@
 
 ### With-namespace way
 
-- best option when there are more than 50 functions defined
-- easy to create nested namespaces
+- best option when there are many functions and resources
+- easy to create nested resources
 
 #### Examples
 
 - `users.getById`
 - `users.create`
 - `user.update`
-- `user.settings.update`
+- `user.updatePreferences`
 - `menu.categories.create`
 - `menu.category.delete`

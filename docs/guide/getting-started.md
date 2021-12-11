@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-- PHP 7.4+
+- PHP 8.0+
 - Composer
 
 ## Installation
@@ -36,6 +36,15 @@ composer require storinka/invoke:^v1
 ```php
 require_once "vendor/autoload.php";
 
+use Invoke\Method;
+use Invoke\Invoke;
+
+// fn style
+function bye(string $name): string
+{
+    return "Bye, {$name}..";
+}
+
 /**
  * @method static string invoke(array $params)
  */
@@ -43,30 +52,24 @@ class Hello extends Method
 {
     public function handle(string $name): string
     {
-        return "Hello, $name!";
+        return "Hello, {$name}!";
     }
 }
 
-// fn style
-function bye(string $name): string
-{
-    return "Bye, $name";
-}
-
 Invoke::setup([
-    "hello" => Hello::class,
     "bye",
+    "hello" => Hello::class,
 ]);
 
 Invoke::handleHTTPRequests();
 ```
 
-Then run the script with `php -S 5000 public/index.php` and make the requests:
+Then run the script with `php -S 5000 public/index.php` and try to invoke:
 
 ```shell
-curl localhost:5000/hello?name=human
+curl localhost:5000/bye?name=REST
 
-curl localhost:5000/bye?name=human
+curl localhost:5000/hello?name=Invoke
 ```
 
 ### Example project
