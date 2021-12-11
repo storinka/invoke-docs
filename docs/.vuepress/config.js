@@ -8,21 +8,37 @@ module.exports = {
     themeConfig: {
         logo: '/images/logo.png',
         logoDark: '/images/logo_dark.png',
+        locales: {
+            '/': {
+                sidebar: {
+                    '/guide/': [
+                        {
+                            text: 'Guide',
+                            children: [
+                                '/guide/README.md',
+                                '/guide/getting-started.md',
+                                '/guide/style-guide.md',
+                            ],
+                        }
+                    ]
+                },
+            },
+        }
     },
 
-    head: [['link', {rel: 'icon', href: '/images/logo.png'}]],
+    head: [['link', { rel: 'icon', href: '/images/logo.png' }]],
     locales: {
         '/': {
             lang: 'en-US',
             label: 'English',
             // title: 'Invoke',
-            description: 'Write functions, not controllers.'
+            description: 'Make functions, not controllers.',
         },
         '/uk/': {
             lang: 'uk-UA',
             label: 'Українська',
             // title: 'Виклик',
-            description: 'Пиши функції, а не контролери.'
+            description: 'Роби функції, а не контролери.'
         }
-    }
+    },
 }

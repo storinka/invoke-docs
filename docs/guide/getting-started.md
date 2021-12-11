@@ -14,9 +14,9 @@ If you want to start a project from scratch, here is what you need.
 #### Create the project folder
 
 ```shell
-mkdir invoke-project
+mkdir invoke-app
 
-cd invoke-project
+cd invoke-app
 ```
 
 #### Init Composer
@@ -31,42 +31,42 @@ composer init
 composer require storinka/invoke:^v1
 ```
 
-#### Create `public/index.php` file with the following content
+#### Create `public/index.php` file with your code
 
 ```php
 require_once "vendor/autoload.php";
 
-// classic style
-class HelloFunction extends InvokeFunction
+/**
+ * @method static string invoke(array $params)
+ */
+class Hello extends Method
 {
-    public function handle(string $name)
+    public function handle(string $name): string
     {
         return "Hello, $name!";
     }
 }
 
 // fn style
-function byeFn(string $name): string
+function bye(string $name): string
 {
     return "Bye, $name";
 }
 
-InvokeMachine::setup([
-    1 => [
-        "hello" => HelloFunction::class,
-        "bye" => "byeFn",
-    ]
+Invoke::setup([
+    "hello" => Hello::class,
+    "bye",
 ]);
 
-InvokeMachine::handleRequest();
+Invoke::handleHTTPRequests();
 ```
 
 Then run the script with `php -S 5000 public/index.php` and make the requests:
 
 ```shell
-curl localhost:5000/invoke/hello?name=human
+curl localhost:5000/hello?name=human
 
-curl localhost:5000/invoke/bye?name=human
+curl localhost:5000/bye?name=human
 ```
 
 ### Example project
@@ -83,11 +83,11 @@ To run the project, use `php -S 5000 public/index.php`
 
 Invoke has a Laravel plugin for integration.
 
-#### Create functions file
+#### Create a config with functions list
 
 ```php
-// config/functions.php
 <?php
+// config/functions.php
 
 return [
     // here put your functions
@@ -137,3 +137,7 @@ return [
 - `app/Invoke/Types`
 
 #### That it, you can do your job now :)
+
+## Examples
+
+TODO: add some project examples
