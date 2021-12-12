@@ -17,6 +17,9 @@ module.exports = {
                             children: [
                                 '/guide/README.md',
                                 '/guide/getting-started.md',
+                                '/guide/methods.md',
+                                '/guide/typesystem.md',
+                                '/guide/configuration.md',
                                 '/guide/style-guide.md',
                             ],
                         }

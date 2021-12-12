@@ -1,6 +1,6 @@
-<center>
+<div style="text-align: center;">
     <img style="background-color: white" src="https://computersciencewiki.org/images/3/39/220px-Function_machine2.svg.png" alt="function">
-</center>
+</div>
 
 # Introduction
 
