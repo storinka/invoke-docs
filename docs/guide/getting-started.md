@@ -28,7 +28,7 @@ composer init
 #### Add Invoke as dependency
 
 ```shell
-composer require storinka/invoke:^v1
+composer require storinka/invoke:^v2
 ```
 
 #### Create `public/index.php` file with your code

@@ -27,17 +27,19 @@ function sayHelloTo(string $name): string
 Setup Invoke:
 
 ```php
+use Invoke\Invoke;
+
 Invoke::setup([
     "sayHelloTo",
 ]);
 
-Invoke::handleHTTPRequests();
+Invoke::serve();
 ```
 
 Start a server, invoke the function:
 
 ```shell
-curl "localhost/sayHelloTo?name=Kitty"
+curl "localhost/invoke/sayHelloTo?name=Kitty"
 
 # response will be: { "result": "Hello, Kitty!" }
 ```
@@ -47,28 +49,34 @@ curl "localhost/sayHelloTo?name=Kitty"
 Create Post and Comment types:
 
 ```php
-class PostResult extends Result
+use Invoke\Data;
+use Invoke\Validations\ArrayOf;
+
+class PostResult extends Data
 {
     public int $id;
     
     public string $title;
     
-    #[ArrayOf(PostType::class)]
+    #[ArrayOf(CommentResult::class)]
     public array $comments;
 }
 ```
 
 ```php
-class CommentResult extends Result
+use Invoke\Data;
+use Invoke\Validations\Length;
+
+class CommentResult extends Data
 {
     public int $id;
     
     public string $message;
 }
 
-class CommentInput extends Input
+class CommentInput extends Data
 {
-    #[Lenght(3, 255)]
+    #[Length(min: 3, max: 255)]
     public string $message;
 }
 ```
@@ -76,6 +84,8 @@ class CommentInput extends Input
 Create methods for getting posts and creating comments:
 
 ```php
+use Invoke\Method;
+
 class GetPosts extends Method
 {
     protected PostsRepository $postsRepository;
@@ -114,21 +124,23 @@ class CreateComment extends Method
 Setup Invoke:
 
 ```php
+use Invoke\Invoke;
+
 Invoke::setup([
     "getPosts" => GetPosts::class,
     "createComment" => CreateComment::class,
 ]);
 
-Invoke::handleHTTPRequests();
+Invoke::serve();
 ```
 
 Start a server, invoke the functions:
 
 ```shell
-curl "localhost/getPosts"
+curl "localhost/invoke/getPosts"
 ```
 
 ```shell
-curl -X POST "localhost/createComment" \
+curl -X POST "localhost/invoke/createComment" \
   --data '{ "postId": 123, comment: { "message: "Great post!" } }'
 ```

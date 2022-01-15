@@ -73,18 +73,16 @@ class PostResult extends Result
 
 ## `Validation` type
 
-This kind of type is used to validate or map data.
+This kind of type is used to validate or transform params.
 
 First, create the validation:
 
 ```php
 use Invoke\Validation;
 
-class EmailValidation extends Validation
-{
-    public static $baseType = "string";
-    
-    public function validate($value, string $name)
+class ValidEmail extends Validation
+{    
+    public function validate(string $name, $value)
     {
         if (!isValueEmail($value)) {
             throw new InvokeParamValidatationException(
@@ -93,37 +91,68 @@ class EmailValidation extends Validation
                 "The provided \"$name\" value is not a valid email."
             );
         }
+        
+        return $value;
     }
 }
 ```
 
-Second, create function builder to easily use the validation:
-
-```php
-function validEmail() {
-    return new EmailValidation();
-}
-```
-
-Finally, use it:
+Then, use it inside `Data` or `Method`:
 
 ```php
 class SomeMethod extends Method
 {
-    public static function params(): array
-    {
-        return [
-            "email" => validEmail(),
-        ];
+    #[ValidEmail]
+    public string $email;
+    
+    protected function handle() {
+        // logic here
     }
 }
 ```
 
-Examples of `Validation` type:
+```php
+class User extends Data
+{
+    #[ValidEmail]
+    public string $email;
+}
+```
 
-- `int(min, max)`
-- `float(min, max)`
-- `string(minLength, maxLength)`
-- `regex(pattern)`
-- `arrayOf(type)`
-- `mapOf(keyType, valueType)`
+## `Type` type:
+
+`Type` type is used to create custom types.
+
+```php
+use Invoke\Type;
+
+class InputFile extends Type
+{
+    public File $file;
+
+    public function __construct(string $name, $value)
+    {
+        if (!($value instanceof File)) {
+            throw new InvalidParamValueException();
+        }
+        
+        $this->file = $file;
+    }
+    
+    public function save(string $path) {
+        // some logic here
+    }
+}
+```
+
+```
+class SomeMethod extends Method
+{
+    public InputFile $logoImage;
+
+    protected function handle()
+    {
+        $this->logoImage->save("/var/data/images/logos/logo.png");
+    }
+}
+```
