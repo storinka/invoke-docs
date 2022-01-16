@@ -147,13 +147,14 @@ Example:
 
 ```php
 use Invoke\Attributes\TraitExtension;
+use Invoke\Method;
 
 #[TraitExtension]
 trait CanCreateBooks
 {
-    public function initCheckPermissions()
+    public function beforeHandleCheckPermissions(array $params = [])
     {
-        // write some logic here
+        // do some logic here
     }
 }
 
@@ -204,6 +205,7 @@ Example:
 use Attribute;
 use Closure;
 use Invoke\MethodExtension;
+use Invoke\Method;
 
 #[Attribute]
 class CheckPermissions extends MethodExtension
@@ -215,7 +217,7 @@ class CheckPermissions extends MethodExtension
         $this->permissions = $permissions;
     }
     
-    public function init(Method|string|Closure $method)
+    public function beforeHandle(Method|string|Closure $method, array $params = [])
     {
         // do some logic here
     }
@@ -232,3 +234,31 @@ class DeleteUser extends Method
     }
 }
 ```
+
+#### Hooks
+
+##### `init`
+
+Called before params validation.
+
+Arguments:
+
+_None._
+
+##### `beforeHandle`
+
+Called after params validation and before handle.
+
+Arguments:
+
+- 1: `Method|string|Closure $method` - method
+- 2: `array $params` - input params
+
+##### `afterHandle`
+
+Called after params validation and before handle.
+
+Arguments:
+
+- 1: `Method|string|Closure $method` - method
+- 2: `mixed $result` - result from the `handle` method
