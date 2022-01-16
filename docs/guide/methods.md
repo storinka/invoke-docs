@@ -133,4 +133,102 @@ At this step finally `handle` is called and its result will be used as result of
 
 ## Extensions
 
-TODO: describe extensions
+There are the ways of extending method's functionality.
+
+### Invoke extensions
+
+You can read more about invoke extensions [here](extensions).
+
+### Trait extensions
+
+Trait extensions allows you to extend method's functionality through traits.
+
+Example:
+
+```php
+use Invoke\Attributes\TraitExtension;
+
+#[TraitExtension]
+trait CanCreateBooks
+{
+    public function initCheckPermissions()
+    {
+        // write some logic here
+    }
+}
+
+class CreateBook extends Method
+{
+    use CanCreateBooks;
+    
+    public function handle()
+    {
+        // ...
+    }
+}
+```
+
+#### Hooks
+
+##### `init{traitName}`
+
+Called before params validation.
+
+Arguments:
+
+_None._
+
+##### `beforeHandle{traitName}`
+
+Called after params validation and before handle.
+
+Arguments:
+
+- 1: `array $params` - input params
+
+##### `afterHandle{traitName}`
+
+Called after params validation and before handle.
+
+Arguments:
+
+- 1: `mixed $result` - result from the `handle` method
+
+### Method extensions
+
+Method extensions allow you to extend method's functionality through class attributes.
+
+Example:
+
+```php
+use Attribute;
+use Closure;
+use Invoke\MethodExtension;
+
+#[Attribute]
+class CheckPermissions extends MethodExtension
+{
+    public array $permissions;
+    
+    public function __construct(array $permissions)
+    {
+        $this->permissions = $permissions;
+    }
+    
+    public function init(Method|string|Closure $method)
+    {
+        // do some logic here
+    }
+}
+
+#[CheckPermissions(["delete-user"])]
+class DeleteUser extends Method
+{
+    use CanCreateBooks;
+    
+    public function handle()
+    {
+        // ...
+    }
+}
+```
