@@ -6,7 +6,9 @@ Example:
 
 ```php
 use Invoke\Validation;
+use Attribute;
 
+#[Attribute]
 class ValidEmail extends Validation
 {    
     public function validate(string $name, $value)
