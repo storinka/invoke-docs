@@ -18,7 +18,10 @@ module.exports = {
                                 '/guide/README.md',
                                 '/guide/getting-started.md',
                                 '/guide/methods.md',
-                                '/guide/typesystem.md',
+                                '/guide/data.md',
+                                '/guide/validation.md',
+                                '/guide/type.md',
+                                '/guide/extensions.md',
                                 '/guide/configuration.md',
                                 '/guide/style-guide.md',
                             ],
@@ -37,11 +40,11 @@ module.exports = {
             // title: 'Invoke',
             description: 'Make functions, not controllers.',
         },
-        '/uk/': {
-            lang: 'uk-UA',
-            label: 'Українська',
-            // title: 'Виклик',
-            description: 'Роби функції, а не контролери.'
-        }
+        // '/uk/': {
+        //     lang: 'uk-UA',
+        //     label: 'Українська',
+        //     // title: 'Виклик',
+        //     description: 'Роби функції, а не контролери.'
+        // }
     },
 }

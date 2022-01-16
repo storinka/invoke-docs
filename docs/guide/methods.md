@@ -36,18 +36,20 @@ example actually will be a good option. Actually, I lied, because the first exam
 
 ## Creating methods
 
-### 1 option: you can always use PHP functions
+### Functions
+
+Simply define a function and register it.
 
 ```php
 function getUser(int $id): UserResult
 {
-    $user = User::where("id", $id)->first();
+    $user = User::find($id);
     
     return UserResult::from($user);
 }
 ```
 
-To register the function simply put it in `setup`:
+To register the function simply put it within `setup`:
 
 ```php
 use Invoke\Invoke;
@@ -57,27 +59,22 @@ Invoke::setup([
 ]);
 ```
 
-### 2 option: it is recommended to create a class for the method with complex logic
+### Methods
+
+This way requires doing more job as you need to create a class for it. Such way is recommended for complex cases.
 
 ```php
 use Invoke\Method;
-use function Invoke\float;
 
 class GetPeopleNearby extends Method
 {
-    // define input params
-    // you can use it to provide complex param types or validations
-    // 
-    // it is optional
-    public static function params(): array
-    {
-        return [
-            "lat" => float(-90, 90),
-            "lng" => float(-180, 180)
-        ];
-    }
+    #[Size(min: -90, max: 90)]
+    public float $lat;
     
-    protected function handle(float $lat, float $lng): array
+    #[Size(min: -180, max: 180)]
+    public float $lng;
+    
+    protected function handle(): array
     {
         // write your complex logic here
         // or use external repository
@@ -85,7 +82,7 @@ class GetPeopleNearby extends Method
 }
 ```
 
-To register the method simply put its class with name in `setup`:
+To register the method put its name and class within `setup`:
 
 ```php
 use Invoke\Invoke;
@@ -101,39 +98,28 @@ When you do `$result = Method::invoke([..params]);` here is what is happening un
 
 ### 1 step: instance creation
 
-First, Invoke checks if custom initializer is available. If so, then the custom one will be used to create an instance
-of the method.
-
-If no custom initializer was provided, new instance will be created like this: `$methodInstance = new Method();`
-
-Read more about custom initializer [here](configuration#custom-initializer).
+At this step a new instance of the method is created.
 
 After method instance is ready, the `__invoke` function in this instance will be called with provided input params. All
 subsequent steps are implemented within this function.
 
-### 2 step: traits initialization
+### 2 step: extensions registration
 
-Here extension-traits are initialized.
+At this step extensions are registered.
 
 Read more about extension-traits [here](#extensions).
 
 ### 3 step: params validation
 
-Method params types are combined from params of `handle` function and result of static `params` function.
-
-### 4 step: `prepare` hooks call
-
-Hook `prepare` is called at this step for the method itself and for the registered extension-traits.
-
-Here you can do any preparation to invocation. You can also do authorization here.
+At this step parameters are validated.
 
 ### 5 final step: `handle` call
 
-At this step finally `handle` is called and its result will be used as result of invocation.
+At this step method `handle` is called.
 
 ## Extensions
 
-There are the ways of extending method's functionality.
+There are three ways of extending method's functionality.
 
 ### Invoke extensions
 
@@ -152,7 +138,7 @@ use Invoke\Method;
 #[TraitExtension]
 trait CanCreateBooks
 {
-    public function beforeHandleCheckPermissions(array $params = [])
+    public function beforeHandleCanCreateBooks(array $params = [])
     {
         // do some logic here
     }
@@ -243,7 +229,7 @@ Called before params validation.
 
 Arguments:
 
-_None._
+- 1: `Method|string|Closure $method` - method
 
 ##### `beforeHandle`
 

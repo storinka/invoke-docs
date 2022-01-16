@@ -31,28 +31,28 @@ composer init
 composer require storinka/invoke:^v2
 ```
 
-#### Create `public/index.php` file with your code
+#### Create `index.php` file with your code
 
 ```php
+<?php
+
 require_once "vendor/autoload.php";
 
 use Invoke\Method;
 use Invoke\Invoke;
 
-// fn style
 function bye(string $name): string
 {
     return "Bye, {$name}..";
 }
 
-/**
- * @method static string invoke(array $params)
- */
 class Hello extends Method
 {
-    public function handle(string $name): string
+    public string $name;
+
+    public function handle(): string
     {
-        return "Hello, {$name}!";
+        return "Hello, {$this->name}!";
     }
 }
 
@@ -61,86 +61,17 @@ Invoke::setup([
     "hello" => Hello::class,
 ]);
 
-Invoke::handleHTTPRequests();
+Invoke::serve();
 ```
 
-Then run the script with `php -S 5000 public/index.php` and try to invoke:
+Then run the project by `php -S 'localhost:5000' index.php` and try to invoke:
 
 ```shell
-curl localhost:5000/bye?name=REST
+curl 'localhost:5000/invoke/bye?name=REST'
 
-curl localhost:5000/hello?name=Invoke
+curl 'localhost:5000/invoke/hello?name=Invoke'
 ```
-
-### Example project
-
-To create a project from example, run the following command:
-
-```shell
-composer create-project --prefer-dist storinka/invoke-example invoke-project
-```
-
-To run the project, use `php -S 5000 public/index.php`
 
 ### Laravel integration
 
-Invoke has a Laravel plugin for integration.
-
-#### Create a config with functions list
-
-```php
-<?php
-// config/functions.php
-
-return [
-    // here put your functions
-];
-```
-
-#### Install the plugin
-
-```shell
-composer require storinka/invoke-laravel:^v1
-```
-
-#### Register the provider
-
-```php
-// config/app.php
-
-return [
-    // ...
-    
-    "providers" => [
-        // ...
-        Invoke\Laravel\Providers\InvokeProvider::class,
-    ],
-    
-    // ...
-];
-```
-
-#### Register routes
-
-```php
-// routes/api.php
-
-\Invoke\Laravel\Facades\Invoke::routes();
-```
-
-```php
-// routes/web.php
-
-\Invoke\Laravel\Facades\Invoke::docsRoutes();
-```
-
-#### Create folders for functions and types:
-
-- `app/Invoke/Functions`
-- `app/Invoke/Types`
-
-#### That it, you can do your job now :)
-
-## Examples
-
-TODO: add some project examples
+Get Laravel integration package [here](https://github.com/storinka/invoke-laravel).
