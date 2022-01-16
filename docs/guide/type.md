@@ -18,7 +18,8 @@ class InputFile extends Type
         $this->file = $file;
     }
     
-    public function save(string $path) {
+    public function save(string $path)
+    {
         // some logic here
     }
 }
@@ -26,7 +27,7 @@ class InputFile extends Type
 
 Inside method:
 
-```
+```php
 class SomeMethod extends Method
 {
     public InputFile $logoImage;

@@ -2,6 +2,7 @@
 home: true
 title: Home
 heroImage: /images/logo.png
+heroImageDark: /images/logo_dark.png
 heroText: 
 
 actions:

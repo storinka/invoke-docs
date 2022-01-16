@@ -1,5 +1,6 @@
+<br>
 <div style="text-align: center;">
-    <img style="background-color: white" src="https://computersciencewiki.org/images/3/39/220px-Function_machine2.svg.png" alt="function">
+    <img style="background-color: white; border-radius: 5px;" src="https://computersciencewiki.org/images/3/39/220px-Function_machine2.svg.png" alt="function">
 </div>
 
 # Introduction

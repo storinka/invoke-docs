@@ -24,6 +24,7 @@ module.exports = {
                                 '/guide/extensions.md',
                                 '/guide/configuration.md',
                                 '/guide/style-guide.md',
+                                '/guide/documentation.md',
                             ],
                         }
                     ]
