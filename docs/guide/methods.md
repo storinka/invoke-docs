@@ -1,10 +1,10 @@
-# Methods (aka functions)
+# Methods
 
 Core feature of Invoke is a method. The method is some kind of action. You use methods to get, create, update or
 transport data through or within Invoke. There is nothing new about it, you can think of methods as actual PHP methods,
 or better as functions.
 
-A method (function) example:
+A method example:
 
 ```php
 function add(float $a, float $b): float
@@ -36,7 +36,7 @@ example actually will be a good option. Actually, I lied, because the first exam
 
 ## Creating methods
 
-### Functions
+### Function
 
 Simply define a function and register it.
 
@@ -59,7 +59,7 @@ Invoke::setup([
 ]);
 ```
 
-### Methods
+### Class
 
 This way requires doing more job as you need to create a class for it. Such way is recommended for complex cases.
 

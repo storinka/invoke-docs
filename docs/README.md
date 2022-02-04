@@ -9,9 +9,17 @@ actions:
 - text: Get Started
   link: /guide/getting-started.html
   type: primary
-- text: Introduction
-  link: /guide/
+- text: Explore APIs
+  link: https://explore.invoke.red
   type: secondary
+
+features:
+- title: Fast
+  details: TODO
+- title: Modern
+  details: TODO
+- title: Intuitive
+  details: TODO
 ---
 
 #### Example 1:

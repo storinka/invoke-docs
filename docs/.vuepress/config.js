@@ -3,7 +3,7 @@ module.exports = {
 
     lang: 'en-US',
     title: 'Invoke',
-    description: 'Write functions, not controllers.',
+    description: 'Create fast and modern web APIs',
 
     themeConfig: {
         logo: '/images/logo.png',
@@ -39,7 +39,7 @@ module.exports = {
             lang: 'en-US',
             label: 'English',
             // title: 'Invoke',
-            description: 'Make functions, not controllers.',
+            description: 'Create fast and modern web APIs',
         },
         // '/uk/': {
         //     lang: 'uk-UA',
