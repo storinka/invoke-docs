@@ -15,11 +15,13 @@ actions:
 
 features:
 - title: Fast
-  details: TODO
+  details: Invoke allows you to build fast APIs and deploy them in minutes.
 - title: Modern
   details: TODO
-- title: Intuitive
+- title: Simple
   details: TODO
+- title: Self-documented
+  details: Just write a code that works and Invoke will create the documentation for you.
 ---
 
 #### Example 1:
