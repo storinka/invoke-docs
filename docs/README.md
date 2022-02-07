@@ -20,8 +20,12 @@ features:
   details: TODO
 - title: Simple
   details: TODO
+- title: 100% typed
+  details: Invoke allows you to create fully typed APIs without pain.
+- title: Super-flexible
+  details: Invoke provides absolutely new way of creating backends with extremely high level of flexibility.
 - title: Self-documented
-  details: Just write a code that works and Invoke will create the documentation for you.
+  details: Just write a code that works and Invoke will generate the documentation for you.
 ---
 
 #### Example 1:

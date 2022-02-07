@@ -1,8 +1,9 @@
 # Data
 
-`Data` is a way to define strictly typed structure that is transmitted between client and server.
+1. `Data` is a [`Type`](type.md) pipe with parameters.
+2. Used to define strictly typed data structures.
 
-Example:
+`Data` example:
 
 ```php
 use Invoke\Data;
@@ -17,7 +18,7 @@ class UserPreferences extends Data
 }
 ```
 
-Inside method:
+Usage with a method:
 
 ```php
 use Invoke\Method;
@@ -31,7 +32,7 @@ class UpdateUserPreferences extends Method
     protected function handle(): UserPreferences
     {
         $updatedPreferences = /* update preferences */;
-        
+
         return UserPreferences::from($updatedPreferences);
     }
 }

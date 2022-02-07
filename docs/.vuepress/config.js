@@ -17,14 +17,15 @@ module.exports = {
                             children: [
                                 '/guide/README.md',
                                 '/guide/getting-started.md',
-                                '/guide/methods.md',
-                                '/guide/data.md',
-                                '/guide/validation.md',
+                                '/guide/pipe.md',
                                 '/guide/type.md',
+                                '/guide/method.md',
+                                '/guide/data.md',
+                                '/guide/validator.md',
                                 '/guide/extensions.md',
                                 '/guide/configuration.md',
                                 '/guide/style-guide.md',
-                                '/guide/documentation.md',
+                                '/guide/schema.md',
                             ],
                         }
                     ]

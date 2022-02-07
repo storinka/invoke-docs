@@ -1,4 +1,4 @@
-# Documentation
+# Schema
 
 Invoke has built-in schema generation. It allows you to create documentation with list and descriptions of available
 methods and types automatically.
@@ -10,7 +10,7 @@ methods and types automatically.
 Example:
 
 ```php
-use Invoke\Docs\Types\SchemaDocument;
+use Invoke\Schema\SchemaDocument;
 
 $currentSchema = SchemaDocument::current();
 ```
@@ -22,7 +22,7 @@ $currentSchema = SchemaDocument::current();
 Example 1:
 
 ```php
-use Invoke\Docs\Types\MethodDocument;
+use Invoke\Schema\MethodDocument;
 
 $methodDocument = MethodDocument::from([
     "name" => "dec2hex",
@@ -33,7 +33,7 @@ $methodDocument = MethodDocument::from([
 Example 2:
 
 ```php
-use Invoke\Docs\Types\MethodDocument;
+use Invoke\Schema\MethodDocument;
 
 $methodDocument = MethodDocument::byName("dec2hex");
 ```
@@ -45,12 +45,15 @@ $methodDocument = MethodDocument::byName("dec2hex");
 Example:
 
 ```php
-use Invoke\Docs\Types\ParamDocument;
-use Invoke\Docs\Types\TypeDocument;
+use Invoke\Schema\ParamDocument;
+use Invoke\Schema\TypeDocument;
 
 $paramDocument = ParamDocument::from([
     "name" => "dec2hex",
-    "type" => TypeDocument::from(...),
+    "type" => "Types\SomeType:someType",
+    "isOptional" => false,
+    "defaultValue" => null,
+    "validators" => ValidatorDocument::from([]),
 ]);
 ```
 
@@ -61,7 +64,7 @@ $paramDocument = ParamDocument::from([
 Example:
 
 ```php
-use Invoke\Docs\Types\TypeDocument;
+use Invoke\Schema\TypeDocument;
 
 $typeDocument = TypeDocument::from(SomeData::class);
 ```

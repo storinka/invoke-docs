@@ -1,6 +1,6 @@
 # Style Guide
 
-## Functions/methods naming
+## Methods naming
 
 ### No-namespace way
 

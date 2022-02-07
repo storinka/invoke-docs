@@ -16,63 +16,27 @@ Invoke::setup([
 
 ## `server`
 
-The server configuration when using `Invoke::serve()`.
+Server configuration when using `HttpPipe`.
 
 ### `pathPrefix`
-
-Prefix of the path.
 
 - Type: `string`
 - Default: `invoke`
 
-## `ioc`
+Prefix of the path.
 
-IoC configuration.
+## `inputMode`
 
-### `makeFn`
+Input mode configuration.
 
-Function for resolving instances.
-
-Example:
-
-```php
-function ($class, $deps) {
-    return new $class();
-}
-```
+### `convertStrings`
 
 - Type: `callable`
 - Default: `null`
 
-### `callFn`
+Convert strings to valid types.
 
-Function for calling functions.
-
-Example:
-
-```php
-function ($callable, $params) {
-    return $callable();
-}
-```
-
-- Type: `callable`
-- Default: `null`
-
-## `typesystem`
-
-Typesystem configuration.
-
-### `strict`
-
-Strict type checking.
-
-- Type: `boolean`
-- Default: `true`
-
-### `typeNames`
-
-Include class name during serialization of `Data`.
-
-- Type: `boolean`
-- Default: `true`
+1. string -> int
+2. string -> float
+3. string -> bool
+4. string -> null
