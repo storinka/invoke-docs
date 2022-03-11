@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/invoke-docs/',
+    base: '/',
 
     lang: 'en-US',
     title: 'Invoke',
