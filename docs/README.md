@@ -44,11 +44,10 @@ Setup Invoke:
 ```php
 use Invoke\Invoke;
 
-Invoke::setup([
+Invoke::create([
     "sayHelloTo",
-]);
+])->serve();
 
-Invoke::serve();
 ```
 
 Start a server, invoke the function:
@@ -65,7 +64,7 @@ Create Post and Comment types:
 
 ```php
 use Invoke\Data;
-use Invoke\Validations\ArrayOf;
+use Invoke\Toolkit\Validators\ArrayOf;
 
 class PostResult extends Data
 {
@@ -80,7 +79,7 @@ class PostResult extends Data
 
 ```php
 use Invoke\Data;
-use Invoke\Validations\Length;
+use Invoke\Toolkit\Validators\Length;
 
 class CommentResult extends Data
 {
@@ -141,12 +140,10 @@ Setup Invoke:
 ```php
 use Invoke\Invoke;
 
-Invoke::setup([
+Invoke::create([
     "getPosts" => GetPosts::class,
     "createComment" => CreateComment::class,
-]);
-
-Invoke::serve();
+])->serve();
 ```
 
 Start a server, invoke the functions:
