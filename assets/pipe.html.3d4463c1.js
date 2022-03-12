@@ -1,0 +1,1 @@
+const t={key:"v-186ca702",path:"/guide/pipe.html",title:"Pipe",lang:"en-US",frontmatter:{},excerpt:"",headers:[{level:2,title:"Introduction",slug:"introduction",children:[]}],git:{updatedTime:1644272421e3,contributors:[{name:"Davyd Kohut",email:"davyd.kohut@gmail.com",commits:1}]},filePathRelative:"guide/pipe.md"};export{t as data};

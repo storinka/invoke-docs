@@ -1,0 +1,1 @@
+const e={key:"v-cad2da4e",path:"/guide/extensions.html",title:"Extensions",lang:"en-US",frontmatter:{},excerpt:"",headers:[],git:{updatedTime:164235418e4,contributors:[{name:"Davyd Kohut",email:"davyd.kohut@gmail.com",commits:1}]},filePathRelative:"guide/extensions.md"};export{e as data};

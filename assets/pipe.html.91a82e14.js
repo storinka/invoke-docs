@@ -1,0 +1,24 @@
+import{c as n}from"./app.f0b58fb0.js";import{_ as s}from"./plugin-vue_export-helper.21dcd24c.js";const a={},e=n(`<h1 id="pipe" tabindex="-1"><a class="header-anchor" href="#pipe" aria-hidden="true">#</a> Pipe</h1><h2 id="introduction" tabindex="-1"><a class="header-anchor" href="#introduction" aria-hidden="true">#</a> Introduction</h2><ol><li><code>Pipe</code> is the most basic abstract component of Invoke.</li><li>Everything withing Invoke is a <code>Pipe</code>.</li><li>Invoke itself is a <code>Pipe</code>.</li><li>Think of <code>Pipe</code> as of a single step of execution of your app.</li></ol><p><code>Pipe</code> gives you an ability to validate/transform/process data during execution of your application.</p><p><code>Pipe</code> example:</p><div class="language-php ext-php line-numbers-mode"><pre class="language-php"><code><span class="token keyword">use</span> <span class="token package">Invoke<span class="token punctuation">\\</span>Pipe</span><span class="token punctuation">;</span>
+<span class="token keyword">use</span> <span class="token package">Invoke<span class="token punctuation">\\</span>Data</span><span class="token punctuation">;</span>
+
+<span class="token attribute"><span class="token delimiter punctuation">#[</span><span class="token attribute-content"><span class="token attribute-class-name class-name">Attribute</span></span><span class="token delimiter punctuation">]</span></span>
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">DoubleValuePipe</span> <span class="token keyword">implements</span> <span class="token class-name">Pipe</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">function</span> <span class="token function-definition function">pass</span><span class="token punctuation">(</span><span class="token keyword type-hint">mixed</span> <span class="token variable">$value</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token variable">$value</span> <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token class-name-definition class-name">SomeData</span> <span class="token keyword">extends</span> <span class="token class-name">Data</span>
+<span class="token punctuation">{</span>
+    <span class="token attribute"><span class="token delimiter punctuation">#[</span><span class="token attribute-content"><span class="token attribute-class-name class-name">DoubleValuePipe</span></span><span class="token delimiter punctuation">]</span></span>
+    <span class="token keyword">public</span> <span class="token keyword type-declaration">int</span> <span class="token variable">$x</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token variable">$some</span> <span class="token operator">=</span> <span class="token class-name static-context">SomeData</span><span class="token operator">::</span><span class="token function">from</span><span class="token punctuation">(</span><span class="token punctuation">[</span>
+    <span class="token string double-quoted-string">&quot;x&quot;</span> <span class="token operator">=&gt;</span> <span class="token number">5</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">echo</span> <span class="token variable">$some</span><span class="token operator">-&gt;</span><span class="token property">x</span><span class="token punctuation">;</span> <span class="token comment">// 10</span>
+</code></pre><div class="line-numbers"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div>`,6);function p(t,o){return e}var i=s(a,[["render",p]]);export{i as default};
